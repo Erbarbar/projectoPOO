@@ -30,5 +30,10 @@ class Aluno extends Pessoa{
     void addDisciplinas(Disciplina disciplina){
         listaDisciplinaNotas.add(disciplina);
     }
+
+    @Override
+    public String toString() {
+        return "Aluno{" + "numeroAluno=" + numeroAluno + ", curso=" + curso + ", anoMatriculacurso=" + anoMatriculacurso + ", regime=" + regime + ", listaDisciplinaNotas=" + listaDisciplinaNotas + '}';
+    }
     
 }

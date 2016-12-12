@@ -5,6 +5,7 @@
  */
 package projectopoo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,16 +23,31 @@ class Sala{
         this.departamento = departamento;
         this.numeroSala = numeroSala;
         this.numeroLugares = numeroLugares;
+        this.exames = new ArrayList<>();
     }
 
     
-    void addExame(Exame exame){
+    Boolean addExame(Exame exame){
+        for(Exame ex : exames){
+            //mesmo dia
+            if(exame.data.ano == ex.data.ano && 
+               exame.data.mes == ex.data.mes && 
+               exame.data.dia == ex.data.dia)
+                //interseccao de horario
+                if((exame.data.horaInicio  >= ex.data.horaInicio &&
+                    exame.data.horaInicio  <= ex.data.horaFim ) 
+                    ||
+                    exame.data.horaFim  <= ex.data.horaFim &&
+                    exame.data.horaFim  >= ex.data.horaInicio ){
+                    System.out.println("Exame em sobreposicao com o de " + ex.disciplina);
+                    return false;
+                }
+        }
         this.exames.add(exame);
+        
+        System.out.println("Alocado exame a sala " + toString());
+        System.out.println(exame.toString());
+        return true;
     }
     
-    
-    @Override
-    public String toString() {
-        return "Sala{" + "departamento=" + departamento + ", numeroSala=" + numeroSala + ", numeroLugares=" + numeroLugares + ", exames=" + exames + '}';
-    }
 }
