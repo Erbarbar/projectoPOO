@@ -32,46 +32,43 @@ public class Exame {
         this.listaVigilantesDocentes = new ArrayList<>();
         this.listaVigilantesNaoDocentes = new ArrayList<>();
         
-        System.out.println("Exame criado");
-        System.out.println(toString());
+        System.out.println("Exame de " + disciplina.nome + " criado"); System.out.println();
     }
     
     void addSala(Sala novaSala){
-        if(!novaSala.addExame(this)){
-            return;
+        if(novaSala.addExame(this)){
+            this.salas.add(novaSala);
+            System.out.println("Sala " + novaSala.numeroSala + " adicionada ao exame de" + disciplina.nome);System.out.println();
         }
-        this.salas.add(novaSala);
         
-        System.out.println("Sala adicionada ao exame " + toString());
-        System.out.println(novaSala.toString());
+        
     }
     
     void addDocenteREsponsavel(Docente docente){
         this.docenteResponsavel = docente;
         
-        System.out.println("Docente adicionado ao exame " + toString());
-        System.out.println(docente.toString());
+        System.out.println("Docente "+ docente.nome +" adicionado ao exame de " + disciplina.nome);System.out.println();
     }
     
     void addVigilanteDocentes(Docente docente){
-        this.listaVigilantesDocentes.add(docente);
-        
-        System.out.println("Docente Vigilante adicionado ao exame " + toString());
-        System.out.println(docente.toString());
+        if(docente.addExame(this)){
+            this.listaVigilantesDocentes.add(docente);
+            System.out.println("Docente Vigilante " + docente.nome + " adicionado ao exame de" + disciplina.nome);System.out.println();
+        }
     }
     
     void addVigilanteNaoDocentes(NaoDocente naoDocente){
+        naoDocente.addExame(this);
         this.listaVigilantesNaoDocentes.add(naoDocente);
         
-        System.out.println("Nao docente Vigilante adicionado ao exame " + toString());
-        System.out.println(naoDocente.toString());
+        System.out.println("Nao docente Vigilante " + naoDocente.nome + " adicionado ao exame " + disciplina.nome);System.out.println();
     }
     
     void changeData(Data data){
         this.data = data;
         
-        System.out.println("Nova data do exame " + toString());
-        System.out.println(data.toString());
+        System.out.println("Nova data do exame de " + disciplina.nome);
+        System.out.println(data.toString());System.out.println();
     }
     @Override
     public String toString() {

@@ -30,7 +30,7 @@ class Docente extends Funcionario{
     void addDisciplina(Disciplina disciplina){
         this.disciplinas.add(disciplina);
     }
-    void addExame(Exame exame){
+    Boolean addExame(Exame exame){
         for(Exame ex : exames){
             //mesmo dia
             if(exame.data.ano == ex.data.ano && 
@@ -43,10 +43,12 @@ class Docente extends Funcionario{
                     exame.data.horaFim  <= ex.data.horaFim &&
                     exame.data.horaFim  >= ex.data.horaInicio ){
                     System.out.println("Exame em sobreposicao com o de " + ex.disciplina);
-                    return;
+                    return false;
                 }
         }
         this.exames.add(exame);
+        System.out.println("Atribuido o exame de " + exame.disciplina.nome + " ao docente " + this.nome);
+        return true;
     }
 
 }

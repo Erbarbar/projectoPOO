@@ -14,7 +14,7 @@ import java.util.List;
  */
 class Sala{
     private String departamento;
-    private String numeroSala;
+    String numeroSala;
     private int numeroLugares;
     
     private List<Exame> exames;
@@ -45,8 +45,7 @@ class Sala{
         }
         this.exames.add(exame);
         
-        System.out.println("Alocado exame a sala " + toString());
-        System.out.println(exame.toString());
+        System.out.println("Alocado exame " + exame.disciplina.nome + " a sala " + this.numeroSala);System.out.println();
         return true;
     }
     

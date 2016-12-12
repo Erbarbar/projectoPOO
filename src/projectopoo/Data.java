@@ -18,7 +18,7 @@ public class Data {
         this.dia = dia;
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
-        this.minutos = horaFim-horaInicio;
+        this.minutos = (horaFim-horaInicio)*60;
     }
 
     @Override

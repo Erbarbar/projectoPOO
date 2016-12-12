@@ -5,13 +5,14 @@
  */
 package projectopoo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author Filipe
  */
-class Curso{
+class Curso implements Serializable{
     String nome;
     int duracao;
     String grau;
