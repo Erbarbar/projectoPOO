@@ -5,11 +5,13 @@
  */
 package projectopoo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Filipe
  */
-class Pessoa{
+class Pessoa implements Serializable{
     String nome;
     String email;
     

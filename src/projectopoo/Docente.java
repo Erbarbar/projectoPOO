@@ -5,6 +5,7 @@
  */
 package projectopoo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Filipe
  */
-class Docente extends Funcionario{
+class Docente extends Funcionario implements Serializable{
     String categoria;
     String areaInvestigacao;
     

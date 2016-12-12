@@ -5,6 +5,7 @@
  */
 package projectopoo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Filipe
  */
-class Sala{
+class Sala  implements Serializable{
     private String departamento;
     String numeroSala;
     private int numeroLugares;

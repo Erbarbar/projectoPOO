@@ -5,13 +5,14 @@
  */
 package projectopoo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author Filipe
  */
-class Aluno extends Pessoa{
+class Aluno extends Pessoa implements Serializable{
     int numeroAluno;
     Curso curso;
     int anoMatriculacurso;

@@ -5,11 +5,13 @@
  */
 package projectopoo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Filipe
  */
-public class Data {
+public class Data implements Serializable{
     int ano, mes, dia, horaInicio, horaFim, minutos;
 
     public Data(int ano, int mes, int dia, int horaInicio, int horaFim) {

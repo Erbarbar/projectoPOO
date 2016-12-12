@@ -5,10 +5,12 @@
  */
 package projectopoo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Filipe
  */
-public class ExameNormal {
+public class ExameNormal implements Serializable{
     
 }

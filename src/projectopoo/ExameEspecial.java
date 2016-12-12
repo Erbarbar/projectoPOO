@@ -5,10 +5,21 @@
  */
 package projectopoo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Filipe
  */
-public class ExameEspecial {
+class ExameEspecial extends Exame implements Serializable{
+    List<Notas> notas;
+
+    public ExameEspecial(Disciplina disciplina) {
+        super(disciplina);
+        this.notas = new ArrayList<>();
+    }
+    
     
 }

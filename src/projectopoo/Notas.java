@@ -11,11 +11,9 @@ import java.io.Serializable;
  *
  * @author Filipe
  */
-class Funcionario extends Pessoa implements Serializable{
-    int numeroMecanografico;
+public class Notas implements Serializable{
+    Aluno aluno;
+    float classificacao;
     
-    Funcionario(String nome, String email, int numero){
-        super(nome,email);
-        this.numeroMecanografico = numero;
-    }
+    
 }
