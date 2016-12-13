@@ -45,7 +45,7 @@ class Exame implements Serializable{
         
     }
     
-    void addDocenteREsponsavel(Docente docente){
+    void addDocenteResponsavel(Docente docente){
         this.docenteResponsavel = docente;
         
         System.out.println("Docente "+ docente.nome +" adicionado ao exame de " + disciplina.nome);System.out.println();

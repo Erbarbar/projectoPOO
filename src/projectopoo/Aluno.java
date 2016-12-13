@@ -6,6 +6,7 @@
 package projectopoo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,14 +19,16 @@ class Aluno extends Pessoa implements Serializable{
     int anoMatriculacurso;
     String regime;
     List<Disciplina> listaDisciplinaNotas;
+    List<Notas> notas;
     
-    Aluno(String nome, String email, int numero, Curso curso, int ano, String regime, List<Disciplina> disciplina){
+    Aluno(String nome, String email, int numero, Curso curso, int ano, String regime){
         super(nome,email);
         this.numeroAluno = numero;
         this.curso = curso;
         this.anoMatriculacurso = ano;
         this.regime = regime;
-        this.listaDisciplinaNotas = disciplina;
+        this.listaDisciplinaNotas = new ArrayList<>();
+        this.notas = new ArrayList<>();
     }
     
     void addDisciplinas(Disciplina disciplina){
