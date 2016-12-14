@@ -6,11 +6,20 @@
 package projectopoo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Filipe
  */
-public class ExameNormal implements Serializable{
+public class ExameNormal extends Exame implements Serializable{
+    List<Notas> notas;
+
+    public ExameNormal(Disciplina disciplina) {
+        super(disciplina);
+        this.notas = new ArrayList<>();
+    }
+    
     
 }

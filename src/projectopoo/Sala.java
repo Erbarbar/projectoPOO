@@ -14,9 +14,9 @@ import java.util.List;
  * @author Filipe
  */
 class Sala  implements Serializable{
-    private String departamento;
+    String departamento;
     String numeroSala;
-    private int numeroLugares;
+    int numeroLugares;
     
     private List<Exame> exames;
     

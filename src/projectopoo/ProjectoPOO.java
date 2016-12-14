@@ -81,15 +81,15 @@ public class ProjectoPOO {
                             case 01: // Curso
                                 System.out.println("Insira o nome do curso: ");
                                 readString = input.nextLine();
-                                String nome = readString;
+                                String nomeCurso = readString;
                                 System.out.println("Insira a duracao do curso: ");
                                 readInt = input.nextInt();input.nextLine();
-                                int duracao = readInt;
+                                int duracaoCurso = readInt;
                                 System.out.println("Insira o grau do curso: ");
                                 readString = input.nextLine();
                                 String grau = readString;
                                 
-                                Curso aux = new Curso(nome,duracao,grau);
+                                Curso aux = new Curso(nomeCurso,duracaoCurso,grau);
                                 cursosList.add(aux);
                                 
                                 
@@ -103,7 +103,27 @@ public class ProjectoPOO {
                                 
                                 break;
                             case 02: // Disciplinas
-
+                                System.out.println("Insira o nome da disciplina: ");
+                                readString = input.nextLine();
+                                String nomeDisciplinas = readString;
+                                System.out.println("Insira a duracao do curso: ");
+                                readInt = input.nextInt();input.nextLine();
+                                int duracao = readInt;
+                                System.out.println("Insira o grau do curso: ");
+                                readString = input.nextLine();
+                                //String grau = readString;
+                                
+                                //Curso aux = new Curso(nome,duracao,grau);
+                                //cursosList.add(aux);
+                                
+                                
+                                
+                                System.out.println("Curso criado:" );
+                                //System.out.println(aux.toString());
+                                
+                                updateCursos(cursosList);
+                                
+                                menu = 0;
                                 break;
                             case 03: // Pessoas
 
@@ -173,6 +193,8 @@ public class ProjectoPOO {
     }
 
     
+    
+    
     static List<Aluno> loadAlunos(List<Aluno> alunosList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Alunos.bin"))) {
@@ -198,8 +220,17 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    static int findAluno(List<Aluno> alunosList, int numeroAluno){
+        int i=0;
+        for(Aluno a : alunosList){
+            if(a.numeroAluno == numeroAluno)
+                return i;
+            i++;
+        }
+        return -1;
+    }
     
-        static List<Curso> loadCursos(List<Curso> cursosList){
+    static List<Curso> loadCursos(List<Curso> cursosList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Cursos.bin"))) {
                 cursosList = (List<Curso>)ois.readObject();
@@ -224,8 +255,17 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    static int findCurso(List<Curso> cursosList, String nome){
+        int i=0;
+        for(Curso c : cursosList){
+            if(c.nome.equals(nome))
+                return i;
+            i++;
+        }
+        return -1;
+    }
     
-       static List<Data> loadDatas(List<Data> datasList){
+    static List<Data> loadDatas(List<Data> datasList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Datas.bin"))) {
                 datasList = (List<Data>)ois.readObject();
@@ -250,8 +290,17 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    static int findData(List<Data> datasList, int ano, int mes, int dia, int horaInicio, int horaFim){
+        int i = 0;
+        for(Data d : datasList){
+            if(d.ano == ano && d.mes == mes && d.dia == dia && d.horaInicio == horaInicio && d.horaFim == horaFim)
+                return i;
+            i++;
+        }
+        return -1;
+    }
     
-        static List<Disciplina> loadDisciplinas(List<Disciplina> disciplinasList){
+    static List<Disciplina> loadDisciplinas(List<Disciplina> disciplinasList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Disciplinas.bin"))) {
                 disciplinasList = (List<Disciplina>)ois.readObject();
@@ -276,8 +325,17 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    static int findDisciplina(List<Disciplina> disciplinasList, String nome){
+        int i = 0;
+        for(Disciplina d : disciplinasList){
+            if(d.nome.equals(nome))
+                return i;
+            i++;
+        }
+        return -1;
+    }
     
-        static List<Docente> loadDocentes(List<Docente> docentesList){
+    static List<Docente> loadDocentes(List<Docente> docentesList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Docentes.bin"))) {
                 docentesList = (List<Docente>)ois.readObject();
@@ -302,8 +360,17 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    static int findDocente(List<Docente> docentesList, int numeroMecanografico){
+        int i = 0;
+        for(Docente d : docentesList){
+            if(d.numeroMecanografico==numeroMecanografico)
+                return i;
+            i++;
+        }
+        return -1;
+    }
     
-        static List<ExameEspecial> loadExamesEspeciais(List<ExameEspecial> examesEspeciaisList){
+    static List<ExameEspecial> loadExamesEspeciais(List<ExameEspecial> examesEspeciaisList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("ExamesEspeciais.bin"))) {
                 examesEspeciaisList = (List<ExameEspecial>)ois.readObject();
@@ -328,8 +395,17 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    static int findExameEspecial(List<ExameEspecial> examesEspeciaisList, String nomeDisciplina){
+        int i = 0;
+        for(ExameEspecial es : examesEspeciaisList){
+            if(es.disciplina.nome.equals(nomeDisciplina))
+                return i;
+            i++;
+        }
+        return -1;
+    }
     
-        static List<ExameNormal> loadExamesNormais(List<ExameNormal> examesNormaisList){
+    static List<ExameNormal> loadExamesNormais(List<ExameNormal> examesNormaisList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("ExamesNormais.bin"))) {
                 examesNormaisList = (List<ExameNormal>)ois.readObject();
@@ -354,8 +430,17 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    static int findExameNormal(List<ExameNormal> examesNormaisList, String nomeDisciplina){
+        int i = 0;
+        for(ExameNormal en : examesNormaisList){
+            if(en.disciplina.nome.equals(nomeDisciplina))
+                return i;
+            i++;
+        }
+        return -1;
+    }
     
-        static List<ExameRecurso> loadExamesRecurso(List<ExameRecurso> examesRecursoList){
+    static List<ExameRecurso> loadExamesRecurso(List<ExameRecurso> examesRecursoList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("ExamesRecurso.bin"))) {
                 examesRecursoList = (List<ExameRecurso>)ois.readObject();
@@ -380,8 +465,17 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    static int findExameRecurso(List<ExameRecurso> examesRecursoList, String nomeDisciplina){
+        int i = 0;
+        for(ExameRecurso er : examesRecursoList){
+            if(er.disciplina.nome.equals(nomeDisciplina))
+                return i;
+            i++;
+        }
+        return -1;
+    }
     
-        static List<NaoDocente> loadNaoDocentes(List<NaoDocente> naoDocentesList){
+    static List<NaoDocente> loadNaoDocentes(List<NaoDocente> naoDocentesList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("NaoDocentes.bin"))) {
                 naoDocentesList = (List<NaoDocente>)ois.readObject();
@@ -406,8 +500,17 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    static int findNaoDocente(List<NaoDocente> naoDocentesList, int numeroMecanografico){
+        int i = 0;
+        for(NaoDocente nd : naoDocentesList){
+            if(nd.numeroMecanografico == numeroMecanografico)
+                return i;
+            i++;
+        }
+        return -1;
+    }
     
-        static List<Notas> loadNotas(List<Notas> notasList){
+    static List<Notas> loadNotas(List<Notas> notasList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Notas.bin"))) {
                 notasList = (List<Notas>)ois.readObject();
@@ -432,8 +535,17 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    static int findNotas(List<Notas> notasList, int numeroAluno){
+        int i = 0;
+        for(Notas n : notasList){
+            if(n.aluno.numeroAluno == numeroAluno)
+                return i;
+            i++;
+        }
+        return -1;
+    }
     
-        static List<Sala> loadSalas(List<Sala> salasList){
+    static List<Sala> loadSalas(List<Sala> salasList){
         try{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Salas.bin"))) {
                 salasList = (List<Sala>)ois.readObject();
@@ -457,6 +569,15 @@ public class ProjectoPOO {
         }catch(IOException e){
             System.out.println(e);
         }
+    }
+    static int findSala(List<Sala> salasList, String departamento, String numeroSala){
+        int i = 0;
+        for(Sala s : salasList){
+            if(s.departamento.equals(departamento) && s.numeroSala.equals(numeroSala))
+                return i;
+            i++;
+        }
+        return -1;
     }
     
     
@@ -543,4 +664,6 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
+    
+    
 }
