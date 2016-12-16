@@ -28,9 +28,8 @@ class Docente extends Funcionario implements Serializable{
         disciplinas = new ArrayList<>();
     }
     
-    void addDisciplina(Disciplina disciplina){
-        this.disciplinas.add(disciplina);
-    }
+    
+    
     Boolean addExame(Exame exame){
         for(Exame ex : exames){
             //mesmo dia
@@ -50,6 +49,15 @@ class Docente extends Funcionario implements Serializable{
         this.exames.add(exame);
         System.out.println("Atribuido o exame de " + exame.disciplina.nome + " ao docente " + this.nome);
         return true;
+    }
+    
+    void addDisciplina(Disciplina disciplina){
+        this.disciplinas.add(disciplina);
+    }
+
+    @Override
+    public String toString() {
+        return "Docente{" + "categoria=" + categoria + ", areaInvestigacao=" + areaInvestigacao + ", exames=" + exames + ", disciplinas=" + disciplinas + '}';
     }
 
 }

@@ -30,4 +30,9 @@ class NaoDocente extends Funcionario implements Serializable{
         exames.add(exame);
         System.out.println("Atribuido o exame de " + exame.disciplina.nome + " ao nao docente " + this.nome);
     }
+
+    @Override
+    public String toString() {
+        return "NaoDocente{" + "categoria=" + categoria + ", cargo=" + cargo + ", exames=" + exames + '}';
+    }
 }

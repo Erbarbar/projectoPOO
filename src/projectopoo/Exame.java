@@ -23,6 +23,7 @@ class Exame implements Serializable{
     Docente docenteResponsavel;
     List<Docente> listaVigilantesDocentes;
     List<NaoDocente> listaVigilantesNaoDocentes;
+    List<Aluno> alunosInscritos;
     
     
 
@@ -32,6 +33,7 @@ class Exame implements Serializable{
         this.salas = new ArrayList<>();
         this.listaVigilantesDocentes = new ArrayList<>();
         this.listaVigilantesNaoDocentes = new ArrayList<>();
+        this.alunosInscritos = new ArrayList<>();
         
         System.out.println("Exame de " + disciplina.nome + " criado"); System.out.println();
     }

@@ -37,7 +37,7 @@ public class ProjectoPOO {
         List<ExameNormal> examesNormaisList = new ArrayList<>();
         List<ExameRecurso> examesRecursoList = new ArrayList<>();
         List<NaoDocente> naoDocentesList = new ArrayList<>();
-        List<Notas> notas = new ArrayList<>();
+        List<Notas> notasList = new ArrayList<>();
         List<Sala> salasList = new ArrayList<>();                       //
         
         
@@ -51,7 +51,7 @@ public class ProjectoPOO {
         examesRecursoList   = loadExamesRecurso(examesRecursoList);
         examesNormaisList   = loadExamesNormais(examesNormaisList);
         naoDocentesList     = loadNaoDocentes(naoDocentesList);
-        notas               = loadNotas(notas);
+        notasList           = loadNotas(notasList);
         
         
         
@@ -71,11 +71,17 @@ public class ProjectoPOO {
                         System.out.println("4) Salas");
                         System.out.println("5) Exames");
                         System.out.println("6) Notas");
+                        System.out.println("7) Listar Exames");
+                        System.out.println("8) Sair");
 
                         readInt = input.nextInt();input.nextLine();
                         
                         if(readInt >= 1 && readInt <= 6)
                             menu = readInt;
+                        if(readInt == 8){
+                            saveData(alunosList, cursosList, datasList, disciplinasList, docentesList,  examesEspeciaisList, examesNormaisList,  examesRecursoList,naoDocentesList,  notasList,  salasList);
+                            return;
+                        }
 
                         break;
                             case 01: // Curso
@@ -84,12 +90,12 @@ public class ProjectoPOO {
                                 String nomeCurso = readString;
                                 System.out.println("Insira a duracao do curso: ");
                                 readInt = input.nextInt();input.nextLine();
-                                int duracaoCurso = readInt;
+                                int duracao = readInt;
                                 System.out.println("Insira o grau do curso: ");
                                 readString = input.nextLine();
                                 String grau = readString;
                                 
-                                Curso aux = new Curso(nomeCurso,duracaoCurso,grau);
+                                Curso aux = new Curso(nomeCurso,duracao,grau);
                                 cursosList.add(aux);
                                 
                                 
@@ -102,29 +108,137 @@ public class ProjectoPOO {
                                 menu = 0;
                                 
                                 break;
-                            case 02: // Disciplinas
-                                System.out.println("Insira o nome da disciplina: ");
-                                readString = input.nextLine();
-                                String nomeDisciplinas = readString;
-                                System.out.println("Insira a duracao do curso: ");
-                                readInt = input.nextInt();input.nextLine();
-                                int duracao = readInt;
-                                System.out.println("Insira o grau do curso: ");
-                                readString = input.nextLine();
-                                //String grau = readString;
                                 
-                                //Curso aux = new Curso(nome,duracao,grau);
-                                //cursosList.add(aux);
+                            case 02:
+                                // Disciplinas
+                                System.out.println("1) Insira o nome da disciplina");
+                                System.out.println("2) Atribuir Docente Responsavel");
+                                System.out.println("3) Atribuir outros Docentes");
+                                System.out.println("4) Atribuir Aluno");
+                                System.out.println("0) Voltar");
+                                readInt = input.nextInt();
+                                input.nextLine();
                                 
-                                
-                                
-                                System.out.println("Curso criado:" );
-                                //System.out.println(aux.toString());
-                                
-                                updateCursos(cursosList);
-                                
-                                menu = 0;
+                                if(readInt >= 1 && readInt <= 4)
+                                    menu = 20+readInt;
+                         
                                 break;
+                                    case 21:
+                                        System.out.println("Qual o nome da disciplina");
+                                        readString = input.nextLine();
+                                        String nomeDisciplina21 = readString;
+                                        Disciplina aux1 = new Disciplina(nomeDisciplina21);
+                                        disciplinasList.add(aux1);
+                                        
+                                        
+                                         System.out.println("Disciplina criada:" );
+                                         System.out.println(aux1.toString());
+
+                                        updateDisciplinas(disciplinasList);
+
+                                        menu = 0;
+
+                                        break;
+                                    case 22:
+                                        
+                                        System.out.println("Diga o nome da disciplina para atribuicao docente");
+                                         readString = input.nextLine();
+                                         String nomeDisciplina22 = readString;
+                                         int indiceDisciplina22 = findDisciplina(disciplinasList,nomeDisciplina22);
+                                         if (indiceDisciplina22 == -1){
+                                             menu = 2;
+                                             System.out.println("nao encntrado");
+                                             break;
+                                         }
+                                         
+                                         System.out.println("Qualo numero mecanografico do docente");
+                                         readInt = input.nextInt();input.nextLine();
+                                         int numeroDocente22 = readInt;
+                                         int indiceDocente22 = findDocente(docentesList,numeroDocente22);
+                                         
+                                         if (indiceDocente22 == -1){
+                                             menu = 2;
+                                             System.out.println("nao encntrado");
+                                             break;
+                                         }
+                                         docentesList.get(indiceDocente22).addDisciplina(disciplinasList.get(indiceDisciplina22));
+                                         disciplinasList.get(indiceDisciplina22).addDocenteResponsavel(docentesList.get(indiceDocente22));
+                                         
+                                         System.out.println("docente adicionado");
+                                         updateDisciplinas(disciplinasList);
+                                         updateDocentes(docentesList);
+                                        
+                                         menu=0;
+                                      
+                                        break;
+                                    case 23:
+                                        System.out.println("Diga o nome da disciplina para atribuicao docente");
+                                         readString = input.nextLine();
+                                         String nomeDisciplina23 = readString;
+                                         int indiceDisciplina23 = findDisciplina(disciplinasList,nomeDisciplina23);
+                                         if (indiceDisciplina23 == -1){
+                                             menu = 2;
+                                             System.out.println("nao encntrado");
+                                             break;
+                                         }
+                                        
+                                        
+                                        System.out.println("Qual o numero mecanografico de outros docentes");
+                                         readInt = input.nextInt();input.nextLine();
+                                         int numeroDocente23 = readInt;
+                                         int indiceDocente23 = findDocente(docentesList,numeroDocente23);
+                                    
+                                         
+                                         if (indiceDocente23 == -1){
+                                             menu = 0;
+                                             System.out.println("nao encntrado");
+                                             break;
+                                         }
+                                         docentesList.get(indiceDocente23).addDisciplina(disciplinasList.get(indiceDisciplina23));
+                                         disciplinasList.get(indiceDisciplina23).addDocenteResponsavel(docentesList.get(indiceDocente23));
+                                         
+                                         System.out.println(" outro docente adicionado");
+                                         updateDisciplinas(disciplinasList);
+                                         updateDocentes(docentesList);
+                                        
+                                         menu=0;
+                                        
+                                        
+                                        break;
+                                    case 24:
+                                            System.out.println("Diga o nome da disciplina para atribuicao do aluno");
+                                            readString = input.nextLine();
+                                            String nomeDisciplina24 = readString;
+                                            int indiceDisciplina24 = findDisciplina(disciplinasList,nomeDisciplina24);
+                                             if (indiceDisciplina24 == -1){
+                                             menu = 2;
+                                             System.out.println("nao encntrado");
+                                             break;
+                                         }
+                                        
+                                        
+                                        System.out.println("Qual o numero do aluno?");
+                                         readInt = input.nextInt();input.nextLine();
+                                         int numeroAluno24 = readInt;
+                                         int indiceAluno24 = findAluno(alunosList,numeroAluno24);
+                                         if (indiceAluno24 == -1){
+                                             menu = 0;
+                                             System.out.println("nao encntrado");
+                                             break;
+                                         }
+                                         
+                                         alunosList.get(indiceAluno24).addDisciplinas(disciplinasList.get(indiceAluno24));
+                                         disciplinasList.get(indiceDisciplina24).addDocenteResponsavel(docentesList.get(indiceAluno24));
+                                         
+                                         System.out.println(" Aluno adicionado");
+                                         updateDisciplinas(disciplinasList);
+                                         updateAlunos(alunosList);
+                                        
+                                         menu=0;
+                                         break;
+                                    
+                                    
+                                
                             case 03: // Pessoas
 
 
@@ -133,63 +247,358 @@ public class ProjectoPOO {
                                 System.out.println("1) Alunos");
                                 System.out.println("2) Docentes");
                                 System.out.println("3) Nao Docentes");
+                                System.out.println("0) Voltar");
                                 
                                 readInt = input.nextInt();
                                 input.nextLine();
                                 
                                 if(readInt >= 1 && readInt <= 3)
                                     menu = 30+readInt;
+                                if(readInt == 0)
+                                    menu = 0;
                                 
                                 break;
                                     case 31: // Alunos
+                                        System.out.println("Qual onome do aluno:");
+                                        readString = input.nextLine();
+                                        String nomeAluno31 = readString;
+                                        System.out.println("Qual o email do aluno");
+                                        readString = input.nextLine();
+                                        String emailAluno31 = readString;
+                                        System.out.println("Qual o numero do aluno:");
+                                        int numeroAluno31 = input.nextInt();input.nextLine();
+                                        System.out.println("Qual é o seu Curso");
+                                        readString= input.nextLine();
+                                        String nomeCurso31 = readString;
+                                        
+                                        
+                                        int indiceCurso31 = findCurso(cursosList,nomeCurso31);
+                                        if (indiceCurso31 == -1){
+                                            menu=0;
+                                            System.out.println("curso nao encontrado");
+                                            break;
+                                        }
+                                        System.out.println("Qual o seu ano");
+                                        int anoAluno31 = input.nextInt();input.nextLine();
+                                        System.out.println("Qual o seu regime (normal,TE,atleta,DA,Erasmos)");
+                                        String regimeAluno31 = input.nextLine();
+                                        Aluno aux31 = new Aluno(nomeAluno31,emailAluno31,numeroAluno31,cursosList.get(indiceCurso31),anoAluno31,regimeAluno31);
+                                        alunosList.add(aux31);
+                                     
+                                         System.out.println("ALuno Adicionado:" );
+                                         System.out.println(aux31.toString());
 
+                                        updateAlunos(alunosList);
+                                  
                                         break;
                                     case 32: // Docentes
+                                        System.out.println("Qual onome do docente:");
+                                        readString = input.nextLine();
+                                        String nomeDocente32 = readString;
+                                        System.out.println("Qual o email do docente");
+                                        readString = input.nextLine();
+                                        String emailDocente32 = readString;
+                                        System.out.println("Qual o seu numeroMecanografico");
+                                        int numeromecanograficoDocente32 = input.nextInt();input.nextLine();
+                                        System.out.println("Qual a sua categoria:");
+                                        String categoriaDocente32 = input.nextLine();
+                                        System.out.println("Qual é a sua Area de investigacao");
+                                        readString= input.nextLine();
+                                        String areaDocente32 = readString;
+                                        
+                                        Docente aux32 = new Docente(nomeDocente32,emailDocente32,numeromecanograficoDocente32,categoriaDocente32,areaDocente32);
+                                        docentesList.add(aux32);
+                                       
+                                        System.out.println("Docente Adicionado:" );
+                                        System.out.println(aux32.toString());
 
+                                        updateDocentes(docentesList);
+                                        
                                         break;
                                     case 33: // Nao Docentes
+                                        System.out.println("Qual onome do nao docente:");
+                                        String nomeNaoDocente33 = input.nextLine();
+                                        
+                                        System.out.println("Qual o email do nao docente");
+                                        String emailNaoDocente33 = input.nextLine();
+                                        
+                                        System.out.println("Qual o seu numeroMecanografico");
+                                        int numeromecanograficoNaoDocente33 = input.nextInt();input.nextLine();
+                                        
+                                        System.out.println("Qual a sua categoria:");
+                                        String categoriaNaoDocente33 = input.nextLine();
+                                        
+                                        System.out.println("Qual é o seu cargo");
+                                        String cargonaoDocente33 = input.nextLine();
+                                        
+                                        NaoDocente aux33 = new NaoDocente(nomeNaoDocente33,emailNaoDocente33,numeromecanograficoNaoDocente33,categoriaNaoDocente33,cargonaoDocente33);
+                                        naoDocentesList.add(aux33);
+                                       
+                                        System.out.println("Docente Adicionado:" );
+                                        System.out.println(aux33.toString());
 
+                                        updateDocentes(docentesList);
                                         break;
                             case 04: // Salas
+                                System.out.println("Departamento:");
+                                String departamentoSala4 = input.nextLine();
+                                
+                                System.out.println("Numero da sala:");
+                                String numeroSala4 = input.nextLine();
+                                
+                                System.out.println("Numero de lugares:");
+                                int lugaresSala4 = input.nextInt();input.nextLine();
+                                
+                                Sala aux4 = new Sala(departamentoSala4,numeroSala4,lugaresSala4);
+                                salasList.add(aux4);
+                                
+                                System.out.println("Sala Adicionada:" );
+                                System.out.println(aux4.toString());
+                                
+                                updateSalas(salasList);
 
                                 break;
                             case 05: // Exames
                                 System.out.println("\t\tEXAMES\n");
-
+                                
                                 System.out.println("1) Epoca Normal");
                                 System.out.println("2) Epoca Recurso");
                                 System.out.println("3) Epoca Especial");
+                                System.out.println("0) Voltar");
                                 
                                 readInt = input.nextInt();
                                 input.nextLine();
                                 if(readInt >= 1 && readInt <= 3)
                                     menu = 50+readInt;
+                                if(readInt == 0)
+                                    menu = 0;
                                 break;
                                     case 51: // Normal
-
+                                        System.out.println("1) Novo exame normal");
+                                        System.out.println("2) Adicionar data");
+                                        System.out.println("3) Adicionar sala");
+                                        System.out.println("4) Adicionar docente responsavel");
+                                        System.out.println("5) Adicionar vigilante");
+                                        System.out.println("6) Inscrever aluno");
+                                        System.out.println("0) Voltar");
+                                        
+                                        readInt = input.nextInt();input.nextLine();
+                                        if(readInt >= 1 && readInt <= 6)
+                                            menu = 510 + readInt;
+                                        if(readInt == 0)
+                                            menu = 5;
                                         break;
+                                            case 511: //  Novo exame normal
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina511 = input.nextLine();
+                                                
+                                                int indexDisciplina511 = findDisciplina(disciplinasList,disciplina511);
+                                                if(indexDisciplina511 == -1){
+                                                    System.out.println("Nao encontrada");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                ExameNormal aux511 = new ExameNormal(disciplinasList.get(indexDisciplina511));
+                                                examesNormaisList.add(aux511);
+                                                
+                                                System.out.println("Adicionado exame normal");
+                                                System.out.println(aux511.toString());
+                                                
+                                                updateExamesNormais(examesNormaisList);
+                                                
+                                                break;
+                                            case 512: // data
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina512 = input.nextLine();
+                                                
+                                                int indexExameNormal512 = findExameNormal(examesNormaisList,disciplina512);
+                                                if(indexExameNormal512 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Ano:");
+                                                int ano512 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Mes:");
+                                                int mes512 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Dia:");
+                                                int dia512 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Hora de inicio:");
+                                                int hotaInicio512 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Hora de fim:");
+                                                int horaFim512 = input.nextInt();input.nextLine();
+                                                
+                                                int dataIndex512 = findData(datasList,ano512,mes512,dia512,hotaInicio512,horaFim512);
+                                                if(dataIndex512 == -1){
+                                                    Data auxData512 = new Data(ano512,mes512,dia512,hotaInicio512,horaFim512);
+                                                    datasList.add(auxData512);
+                                                    dataIndex512 = findData(datasList,ano512,mes512,dia512,hotaInicio512,horaFim512);
+                                                    updateDatas(datasList);
+                                                }
+                                                
+                                                examesNormaisList.get(indexExameNormal512).changeData(datasList.get(dataIndex512));
+                                                System.out.println("Alterada a data");
+                                                
+                                                updateExamesNormais(examesNormaisList);
+                                                
+                                                
+                                                break;
+                                            case 513://sala
+
+                                                break;
+                                            case 514://docente responsavel
+
+                                                break;
+                                            case 515://Adicionar vigilante
+
+                                                break;
+                                            case 516://Inscrever aluno
+
+                                                break;
                                     case 52: // Recurso
-
+                                        System.out.println("1) Novo exame de recurso");
+                                        System.out.println("2) Adicionar data");
+                                        System.out.println("3) Adicionar sala");
+                                        System.out.println("4) Adicionar docente responsavel");
+                                        System.out.println("5) Adicionar vigilante");
+                                        System.out.println("6) Inscrever aluno");
+                                        System.out.println("0) Voltar");
+                                        
+                                        readInt = input.nextInt();input.nextLine();
+                                        if(readInt >= 1 && readInt <= 6)
+                                            menu = 520 + readInt;
+                                        if(readInt == 0)
+                                            menu = 5;
                                         break;
+                                            case 521:
+
+                                                break;
+                                            case 522:
+
+                                                break;
+                                            case 523:
+
+                                                break;
+                                            case 524:
+
+                                                break;
+                                            case 525:
+
+                                                break;
+                                            case 526:
+
+                                                break;
                                     case 53: // Especial
-
+                                        System.out.println("1) Novo exame especial");
+                                        System.out.println("2) Adicionar data");
+                                        System.out.println("3) Adicionar sala");
+                                        System.out.println("4) Adicionar docente responsavel");
+                                        System.out.println("5) Adicionar vigilante");
+                                        System.out.println("6) Inscrever aluno");
+                                        System.out.println("0) Voltar");
+                                        
+                                        readInt = input.nextInt();input.nextLine();
+                                        if(readInt >= 1 && readInt <= 6)
+                                            menu = 530 + readInt;
+                                        if(readInt == 0)
+                                            menu = 5;
                                         break;
+                                            case 531:
+
+                                                break;
+                                            case 532:
+
+                                                break;
+                                            case 533:
+
+                                                break;
+                                            case 534:
+
+                                                break;
+                                            case 535:
+
+                                                break;
+                                            case 536:
+
+                                                break;
                             case 06: // notas
 
                                 break;
+                            case 07: // informacoes exames
+                                System.out.println("1) Listar Exames – Epoca, disciplina, data, hora, duracao, sala, numero de vigilantes convocados e de alunos inscritos");
+                                System.out.println("2) Listar alunos inscritos num exame e classificacoes obtidas, caso existam");
+                                System.out.println("3) Listar exames em que um aluno está inscrito e classificações obtidas, caso existam");
+                                System.out.println("4) Listar docentes e funcionários associados a um exame");
+                                System.out.println("5) Listar exames em que um docente ou funcionário está envolvido");
+                                System.out.println("6) Listar notas de um exame");
+                                System.out.println("0) Voltar");
+                                
+                                readInt = input.nextInt();input.nextLine();
+                                if(readInt >= 1 && readInt <= 6)
+                                    menu = 70+readInt;
+                                if(readInt == 0)
+                                    menu = 0;
+                                break;
+                                    case 71:
+                                        for(ExameNormal en : examesNormaisList){
+                                            // prepara o display das salas
+                                            String salasString = "";
+                                            for(Sala s : en.salas){
+                                                String salaStringAux = s.numeroSala + ", ";
+                                                salasString = salasString.concat(salaStringAux);
+                                            }
+                                            // conta o numero de vigilantes e o de alunos
+                                            int numeroAlunos = 0, numeroVigilantes = 0;
+                                            for(Aluno a: en.alunosInscritos)
+                                                numeroAlunos++;
+                                            for(Docente d: en.listaVigilantesDocentes)
+                                                numeroVigilantes++;
+                                            for(NaoDocente nd: en.listaVigilantesNaoDocentes)
+                                                numeroVigilantes++;
+                                            
+                                            System.out.println("Epoca: Normal" +
+                                                               " Disciplina: " + en.disciplina.nome + 
+                                                               " Data: " + en.data.ano+"-"+en.data.mes+"/"+en.data.dia +
+                                                               " Hora: " + en.data.horaInicio +
+                                                               " Duracao (em minutos): " + en.data.minutos +
+                                                               " Sala: " + salasString +
+                                                               " Numero de vigilantes convocados: "+ numeroVigilantes +
+                                                               " Numero de alunos inscritos: " + numeroAlunos);
+                                        }
+                                        for(ExameRecurso er: examesRecursoList){
+                                            
+                                        }
+                                        for(ExameEspecial es: examesEspeciaisList){
+                                            
+                                        }
+                                        break;
+                                    case 72:
+                                        
+                                            break;
+                                    case 73:
+                                        
+                                            break;
+                                    case 74:
+                                        
+                                            break;
+                                    case 75:
+                                        
+                                            break;
+                                    case 76:
+                                        
+                                            break;
                     default:break;
                 }
             }catch(NumberFormatException e){
                 System.out.println(e);
             }
-        }
-        
-        
-        /*
-        saveData(alunosList, cursosList, datasList, disciplinasList, 
-                docentesList, examesEspeciaisList, examesNormaisList, 
-                examesRecursoList, naoDocentesList, notas, salasList);
-        */
+        }  
     }
 
     

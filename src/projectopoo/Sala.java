@@ -49,5 +49,10 @@ class Sala  implements Serializable{
         System.out.println("Alocado exame " + exame.disciplina.nome + " a sala " + this.numeroSala);System.out.println();
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Sala{" + "departamento=" + departamento + ", numeroSala=" + numeroSala + ", numeroLugares=" + numeroLugares + ", exames=" + exames + '}';
+    }
     
 }
