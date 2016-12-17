@@ -1123,28 +1123,387 @@ public class ProjectoPOO {
                                         }
                                         break;
                                     case 72: // Listar alunos inscritos num exame e classificacoes obtidas, caso existam
-                                            for(ExameNormal en : examesNormaisList){
-                                                
-                                            }
-                                            for(ExameRecurso er : examesRecursoList){
-                                                
-                                            }
-                                            for(ExameEspecial es : examesEspeciaisList){
-                                                
-                                            }
+                                        System.out.println("1) Epoca normal");
+                                        System.out.println("2) Epoca recurso");
+                                        System.out.println("3) Epoca especial");
+                                        System.out.println("0) Voltar");
+                                        
+                                        readInt = input.nextInt(); input.nextLine();
+                                        if(readInt == 0){
+                                            menu = 0;
                                             break;
+                                        }
+                                        if(readInt >=1 && readInt <= 3)
+                                            menu = 720 + readInt;
+                                        break;
+                                            case 721: // normal
+                                                System.out.println("Qual a disciplina do exame:");
+                                                String disciplina721 = input.nextLine();
+                                                
+                                                int indiceExame721 = findExameNormal(examesNormaisList,disciplina721);
+                                                if(indiceExame721 == -1){
+                                                    System.out.println("Exame nao encontrado");
+                                                    menu = 72;
+                                                    break;
+                                                }
+                                                int linha721 = 0;
+                                                int indiceNota721;
+                                                String displayNota721 = "Nao lancada"; // se nao encontrar a nota
+                                                for(Aluno a : examesNormaisList.get(indiceExame721).alunosInscritos){
+                                                    linha721++;
+                                                    
+                                                    indiceNota721 = findNotas(notasList,a,examesNormaisList.get(indiceExame721));
+                                                    if(indiceNota721 >=0)// encontra a nota
+                                                        displayNota721 = Float.toString(notasList.get(indiceNota721).classificacao);
+                                                    
+                                                    System.out.println(linha721 + ")"+
+                                                                      " Nome: " + a.nome +
+                                                                      " Nota: " + displayNota721);
+                                                }
+                                                break;
+                                            case 722: // recurso
+                                                System.out.println("Qual a disciplina do exame:");
+                                                String disciplina722 = input.nextLine();
+                                                
+                                                int indiceExame722 = findExameRecurso(examesRecursoList,disciplina722);
+                                                if(indiceExame722 == -1){
+                                                    System.out.println("Exame nao encontrado");
+                                                    menu = 72;
+                                                    break;
+                                                }
+                                                int linha722 = 0;
+                                                int indiceNota722;
+                                                String displayNota722 = "Nao lancada"; // se nao encontrar a nota
+                                                for(Aluno a : examesRecursoList.get(indiceExame722).alunosInscritos){
+                                                    linha722++;
+                                                    
+                                                    indiceNota722 = findNotas(notasList,a,examesRecursoList.get(indiceExame722));
+                                                    if(indiceNota722 >=0)// encontra a nota
+                                                        displayNota722 = Float.toString(notasList.get(indiceNota722).classificacao);
+                                                    
+                                                    System.out.println(linha722 + ")"+
+                                                                      " Nome: " + a.nome +
+                                                                      " Nota: " + displayNota722);
+                                                }
+
+                                                break;
+                                            case 723: // especial
+                                                System.out.println("Qual a disciplina do exame:");
+                                                String disciplina723 = input.nextLine();
+                                                
+                                                int indiceExame723 = findExameEspecial(examesEspeciaisList,disciplina723);
+                                                if(indiceExame723 == -1){
+                                                    System.out.println("Exame nao encontrado");
+                                                    menu = 72;
+                                                    break;
+                                                }
+                                                int linha723 = 0;
+                                                int indiceNota723;
+                                                String displayNota723 = "Nao lancada"; // se nao encontrar a nota
+                                                for(Aluno a : examesEspeciaisList.get(indiceExame723).alunosInscritos){
+                                                    linha723++;
+                                                    
+                                                    indiceNota723 = findNotas(notasList,a,examesEspeciaisList.get(indiceExame723));
+                                                    if(indiceNota723 >=0)// encontra a nota
+                                                        displayNota723 = Float.toString(notasList.get(indiceNota723).classificacao);
+                                                    
+                                                    System.out.println(linha723 + ")"+
+                                                                      " Nome: " + a.nome +
+                                                                      " Nota: " + displayNota723);
+                                                }
+
+                                                break;
                                     case 73: // Listar exames em que um aluno está inscrito e classificações obtidas, caso existam
-                                        
-                                            break;
+                                        System.out.println("Numero do aluno");
+                                        int numeroAluno73 = input.nextInt(); input.nextLine();
+                                        int indexAluno73 = findAluno(alunosList,numeroAluno73);
+                                        if(indexAluno73 == -1){
+                                            System.out.println("Aluno nao encontrado");
+                                            menu = 7;
+                                        }
+                                        int linha73 = 0;
+                                        String epoca73 = "";
+                                        String nota73 = "Nao lancada";
+                                        // porcura todos os exames do aluno
+                                        for(Exame e :alunosList.get(indexAluno73).exames){
+                                            
+                                            if(e instanceof  ExameNormal){       // normais
+                                                ExameNormal en = (ExameNormal)e;
+                                                epoca73 = "normal";
+                                                for(Notas n : en.notas){ // procura dentro das notas desse exame
+                                                    if(n.aluno == alunosList.get(indexAluno73)){ 
+                                                        nota73 = Float.toString(n.classificacao);// a nota do aluno
+                                                    }
+                                                }
+                                            }
+                                            else if(e instanceof  ExameRecurso){ // recurso
+                                                ExameRecurso er = (ExameRecurso)e;
+                                                epoca73 = "recurso";
+                                                for(Notas n : er.notas){ // procura dentro das notas desse exame
+                                                    if(n.aluno == alunosList.get(indexAluno73)){ 
+                                                        nota73 = Float.toString(n.classificacao);// a nota do aluno
+                                                    }
+                                                }
+                                            }
+                                            else if(e instanceof  ExameEspecial){ // especiais
+                                                ExameEspecial en = (ExameEspecial)e;
+                                                epoca73 = "especial";
+                                                for(Notas n : en.notas){ // procura dentro das notas desse exame
+                                                    if(n.aluno == alunosList.get(indexAluno73)){ 
+                                                        nota73 = Float.toString(n.classificacao);// a nota do aluno
+                                                    }
+                                                }
+                                            }
+                                            System.out.println(linha73 + ")" +
+                                                              " Disciplina: " + e.disciplina.nome +
+                                                              " Epoca: " + epoca73 +
+                                                              " Nota: " + nota73);
+                                        }
+                                        menu = 7;
+                                        break;
                                     case 74: // Listar docentes e funcionários associados a um exame
+                                        System.out.println("1) Epoca normal");
+                                        System.out.println("2) Epoca recurso");
+                                        System.out.println("3) Epoca especial");
+                                        System.out.println("0) Voltar");
                                         
+                                        readInt = input.nextInt(); input.nextLine();
+                                        if(readInt == 0){
+                                            menu = 0;
                                             break;
+                                        }
+                                        if(readInt >=1 && readInt <= 3)
+                                            menu = 740 + readInt;
+                                        
+                                        break;
+                                            case 741: // normal
+                                                System.out.println("Qual a disciplina do exame:");
+                                                String disciplina741 = input.nextLine();
+                                                
+                                                int indiceExame741 = findExameNormal(examesNormaisList,disciplina741);
+                                                if(indiceExame741 == -1){
+                                                    System.out.println("Exame nao encontrado");
+                                                    menu = 74;
+                                                    break;
+                                                }
+                                                int linha741 = 0;
+                                                for(Docente d : examesNormaisList.get(indiceExame741).listaVigilantesDocentes){
+                                                    linha741++;
+                                                    System.out.println(linha741 + ")" +
+                                                                      " Titulo: Docente" +
+                                                                      " Nome: " + d.nome +
+                                                                      " Numero mecanografico: " + d.numeroMecanografico +
+                                                                      " Categoria: " + d.categoria + 
+                                                                      " Area de investigacao" + d.areaInvestigacao);
+                                                }
+                                                linha741 = 0;
+                                                for(NaoDocente nd : examesNormaisList.get(indiceExame741).listaVigilantesNaoDocentes){
+                                                    linha741++;
+                                                    System.out.println(linha741 + ")" +
+                                                                      " Titulo: Nao Docente" +
+                                                                      " Nome: " + nd.nome +
+                                                                      " Numero mecanografico: " + nd.numeroMecanografico +
+                                                                      " Categoria: " + nd.categoria + 
+                                                                      " Cargo" + nd.cargo);
+                                                }
+                                                menu = 74;
+                                                break;
+                                            case 742: // recurso
+                                                System.out.println("Qual a disciplina do exame:");
+                                                String disciplina742 = input.nextLine();
+                                                
+                                                int indiceExame742 = findExameRecurso(examesRecursoList,disciplina742);
+                                                if(indiceExame742 == -1){
+                                                    System.out.println("Exame nao encontrado");
+                                                    menu = 74;
+                                                    break;
+                                                }
+                                                int linha742 = 0;
+                                                for(Docente d : examesRecursoList.get(indiceExame742).listaVigilantesDocentes){
+                                                    linha742++;
+                                                    System.out.println(linha742 + ")" +
+                                                                      " Titulo: Docente" +
+                                                                      " Nome: " + d.nome +
+                                                                      " Numero mecanografico: " + d.numeroMecanografico +
+                                                                      " Categoria: " + d.categoria + 
+                                                                      " Area de investigacao" + d.areaInvestigacao);
+                                                }
+                                                linha742 = 0;
+                                                for(NaoDocente nd : examesRecursoList.get(indiceExame742).listaVigilantesNaoDocentes){
+                                                    linha742++;
+                                                    System.out.println(linha742 + ")" +
+                                                                      " Titulo: Nao Docente" +
+                                                                      " Nome: " + nd.nome +
+                                                                      " Numero mecanografico: " + nd.numeroMecanografico +
+                                                                      " Categoria: " + nd.categoria + 
+                                                                      " Cargo" + nd.cargo);
+                                                }
+                                                menu = 74;
+                                                break;
+                                            case 743: // especial
+                                                System.out.println("Qual a disciplina do exame:");
+                                                String disciplina743 = input.nextLine();
+                                                
+                                                int indiceExame743 = findExameEspecial(examesEspeciaisList,disciplina743);
+                                                if(indiceExame743 == -1){
+                                                    System.out.println("Exame nao encontrado");
+                                                    menu = 74;
+                                                    break;
+                                                }
+                                                int linha743 = 0;
+                                                for(Docente d : examesEspeciaisList.get(indiceExame743).listaVigilantesDocentes){
+                                                    linha743++;
+                                                    System.out.println(linha743 + ")" +
+                                                                      " Titulo: Docente" +
+                                                                      " Nome: " + d.nome +
+                                                                      " Numero mecanografico: " + d.numeroMecanografico +
+                                                                      " Categoria: " + d.categoria + 
+                                                                      " Area de investigacao" + d.areaInvestigacao);
+                                                }
+                                                linha743 = 0;
+                                                for(NaoDocente nd : examesEspeciaisList.get(indiceExame743).listaVigilantesNaoDocentes){
+                                                    linha743++;
+                                                    System.out.println(linha743 + ")" +
+                                                                      " Titulo: Nao Docente" +
+                                                                      " Nome: " + nd.nome +
+                                                                      " Numero mecanografico: " + nd.numeroMecanografico +
+                                                                      " Categoria: " + nd.categoria + 
+                                                                      " Cargo" + nd.cargo);
+                                                }
+                                                menu = 74;
+                                                break;
+                                        
                                     case 75: // Listar exames em que um docente ou funcionário está envolvido
+                                        System.out.println("Numero mecanografico do funcionario");
+                                        int numeroFuncionario75 = input.nextInt(); input.nextLine();
                                         
+                                        int indiceFuncionario75 = findDocente(docentesList,numeroFuncionario75);
+                                        if(indiceFuncionario75 >= 0 ){ // se encontrou
+                                            String epoca75 = "";
+                                            int linha75 = 0;
+                                            for(Exame e : docentesList.get(indiceFuncionario75).exames){
+                                                linha75++;
+                                                if(e instanceof ExameNormal)
+                                                    epoca75 = "normal";
+                                                if(e instanceof ExameRecurso)
+                                                    epoca75 = "recurso";
+                                                if(e instanceof ExameEspecial)
+                                                    epoca75 = "especial";
+                                                System.out.println(linha75 + ")" +
+                                                                 " Disciplina: " + e.disciplina.nome +
+                                                                 " Epoca: " + epoca75 +
+                                                                 " Data: " + e.data.ano + "/" + e.data.mes + "/" + e.data.dia);
+                                            }
+                                            menu = 7;
                                             break;
+                                        }
+                                        indiceFuncionario75 = findNaoDocente(naoDocentesList,numeroFuncionario75);
+                                        if(indiceFuncionario75 >= 0 ){ // se encontrou
+                                            String epoca75 = "";
+                                            int linha75 = 0;
+                                            for(Exame e : naoDocentesList.get(indiceFuncionario75).exames){
+                                                linha75++;
+                                                if(e instanceof ExameNormal)
+                                                    epoca75 = "normal";
+                                                if(e instanceof ExameRecurso)
+                                                    epoca75 = "recurso";
+                                                if(e instanceof ExameEspecial)
+                                                    epoca75 = "especial";
+                                                System.out.println(linha75 + ")" +
+                                                                 " Disciplina: " + e.disciplina.nome +
+                                                                 " Epoca: " + epoca75 +
+                                                                 " Data: " + e.data.ano + "/" + e.data.mes + "/" + e.data.dia);
+                                            }
+                                            menu = 7;
+                                            break;
+                                        }
+                                        
+                                        System.out.println("Nao foi encontrado esse funcionario");
+                                        
+                                        break;
                                     case 76: // Listar notas de um exame
+                                        System.out.println("1) Epoca normal");
+                                        System.out.println("2) Epoca recurso");
+                                        System.out.println("3) Epoca especial");
+                                        System.out.println("0) Voltar");
                                         
+                                        readInt = input.nextInt(); input.nextLine();
+                                        if(readInt == 0){
+                                            menu = 0;
                                             break;
+                                        }
+                                        if(readInt >=1 && readInt <= 3)
+                                            menu = 760 + readInt;
+                                        
+                                        break;
+                                            case 761: // normal
+                                                System.out.println("Qual a disciplina do exame:");
+                                                String disciplina761 = input.nextLine();
+                                                
+                                                int indiceExame761 = findExameNormal(examesNormaisList,disciplina761);
+                                                if(indiceExame761 == -1){
+                                                    System.out.println("Exame nao encontrado");
+                                                    menu = 76;
+                                                    break;
+                                                }
+                                                int linha761 = 0;
+                                                for(Notas n : examesNormaisList.get(indiceExame761).notas){
+                                                    linha761++;
+                                                    
+                                                    System.out.println(linha761 + ") " +
+                                                                     " Nome: " + n.aluno.nome +
+                                                                     " Numero: " + n.aluno.numeroAluno +
+                                                                     " Nota: " + n.classificacao);
+                                                }
+                                                menu = 7;
+
+                                                break;
+                                            case 762: // recurso
+                                                System.out.println("Qual a disciplina do exame:");
+                                                String disciplina762 = input.nextLine();
+                                                
+                                                int indiceExame762 = findExameRecurso(examesRecursoList,disciplina762);
+                                                if(indiceExame762 == -1){
+                                                    System.out.println("Exame nao encontrado");
+                                                    menu = 76;
+                                                    break;
+                                                }
+                                                
+                                                int linha762 = 0;
+                                                for(Notas n : examesRecursoList.get(indiceExame762).notas){
+                                                    linha762++;
+                                                    
+                                                    System.out.println(linha762 + ") " +
+                                                                     " Nome: " + n.aluno.nome +
+                                                                     " Numero: " + n.aluno.numeroAluno +
+                                                                     " Nota: " + n.classificacao);
+                                                }
+                                                menu = 7;
+
+                                                break;
+                                            case 763: // especial
+                                                System.out.println("Qual a disciplina do exame:");
+                                                String disciplina763 = input.nextLine();
+                                                
+                                                int indiceExame763 = findExameEspecial(examesEspeciaisList,disciplina763);
+                                                if(indiceExame763 == -1){
+                                                    System.out.println("Exame nao encontrado");
+                                                    menu = 76;
+                                                    break;
+                                                }
+                                                
+                                                int linha763 = 0;
+                                                for(Notas n : examesEspeciaisList.get(indiceExame763).notas){
+                                                    linha763++;
+                                                    
+                                                    System.out.println(linha763 + ") " +
+                                                                     " Nome: " + n.aluno.nome +
+                                                                     " Numero: " + n.aluno.numeroAluno +
+                                                                     " Nota: " + n.classificacao);
+                                                }
+                                                menu = 7;
+
+                                                break;
                     default:break;
                 }
             }catch(NumberFormatException e){
@@ -1496,10 +1855,10 @@ public class ProjectoPOO {
             System.out.println(e);
         }
     }
-    static int findNotas(List<Notas> notasList, int numeroAluno){
+    static int findNotas(List<Notas> notasList, Aluno aluno, Exame exame){
         int i = 0;
         for(Notas n : notasList){
-            if(n.aluno.numeroAluno == numeroAluno)
+            if(n.aluno.numeroAluno == aluno.numeroAluno && n.exame == exame)
                 return i;
             i++;
         }

@@ -14,6 +14,13 @@ import java.io.Serializable;
 public class Notas implements Serializable{
     Aluno aluno;
     float classificacao;
+    Exame exame;
+
+    public Notas(Aluno aluno, float classificacao, Exame exame) {
+        this.aluno = aluno;
+        this.classificacao = classificacao;
+        this.exame = exame;
+    }
     
     
 }
