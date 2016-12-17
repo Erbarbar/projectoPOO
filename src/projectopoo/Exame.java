@@ -53,14 +53,14 @@ class Exame implements Serializable{
         System.out.println("Docente "+ docente.nome +" adicionado ao exame de " + disciplina.nome);System.out.println();
     }
     
-    void addVigilanteDocentes(Docente docente){
+    void addVigilanteDocente(Docente docente){
         if(docente.addExame(this)){
             this.listaVigilantesDocentes.add(docente);
             System.out.println("Docente Vigilante " + docente.nome + " adicionado ao exame de" + disciplina.nome);System.out.println();
         }
     }
     
-    void addVigilanteNaoDocentes(NaoDocente naoDocente){
+    void addVigilanteNaoDocente(NaoDocente naoDocente){
         naoDocente.addExame(this);
         this.listaVigilantesNaoDocentes.add(naoDocente);
         

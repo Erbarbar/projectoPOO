@@ -407,6 +407,8 @@ public class ProjectoPOO {
                                                 
                                                 updateExamesNormais(examesNormaisList);
                                                 
+                                                menu = 51;
+                                                
                                                 break;
                                             case 512: // data
                                                 System.out.println("Disciplina do exame:");
@@ -447,18 +449,145 @@ public class ProjectoPOO {
                                                 
                                                 updateExamesNormais(examesNormaisList);
                                                 
+                                                menu = 51;
                                                 
                                                 break;
                                             case 513://sala
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina513 = input.nextLine();
+                                                
+                                                int indexExameNormal513 = findExameNormal(examesNormaisList,disciplina513);
+                                                if(indexExameNormal513 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Departamento da sala");
+                                                String departamentoSala513 = input.nextLine();
+                                                
+                                                System.out.println("Numero da sala");
+                                                String numeroSala513 = input.nextLine();
+                                                
+                                                int indexSala513 = findSala(salasList,departamentoSala513,numeroSala513);
+                                                if(indexSala513 == -1){
+                                                    System.out.println("Sala nao encontrada");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                examesNormaisList.get(indexExameNormal513).addSala(salasList.get(indexSala513));
+                                                
+                                                System.out.println("Sala adicionada com sucesso!");
+                                                
+                                                updateExamesNormais(examesNormaisList);
+                                                
+                                                menu = 51;
 
                                                 break;
                                             case 514://docente responsavel
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina514 = input.nextLine();
+                                                
+                                                int indexExameNormal514 = findExameNormal(examesNormaisList,disciplina514);
+                                                if(indexExameNormal514 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Numero mecanografico do docente responsavel:");
+                                                int numeroMecanograficoDocente514 = input.nextInt();input.nextLine();
+                                                
+                                                int indexDocente514 = findDocente(docentesList,numeroMecanograficoDocente514);
+                                                if(indexDocente514 == -1){
+                                                    System.out.println("Docente nao encontrado!");
+                                                    menu = 0;
+                                                }
+                                                
+                                                examesNormaisList.get(indexExameNormal514).addDocenteResponsavel(docentesList.get(indexDocente514));
+                                                docentesList.get(indexDocente514).addExame(examesNormaisList.get(indexExameNormal514));
+                                                
+                                                System.out.println("Docente responsavel adicionado com sucesso");
+                                                
+                                                updateExamesNormais(examesNormaisList);
+                                                updateDocentes(docentesList);
+                                                
+                                                menu = 51;
 
                                                 break;
                                             case 515://Adicionar vigilante
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina515 = input.nextLine();
+                                                
+                                                int indexExameNormal515 = findExameNormal(examesNormaisList,disciplina515);
+                                                if(indexExameNormal515 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Numero mecanografico do vigilante:");
+                                                int numeroMecanograficoDocente515 = input.nextInt();input.nextLine();
+                                                
+                                                int indexDocente515 = findDocente(docentesList,numeroMecanograficoDocente515);
+                                                if(indexDocente515 >= 0){
+                                                    examesNormaisList.get(indexExameNormal515).addVigilanteDocente(docentesList.get(indexDocente515));
+                                                    docentesList.get(indexDocente515).addExame(examesNormaisList.get(indexExameNormal515));
 
-                                                break;
+                                                    System.out.println("Docente vigilante adicionado a lista de vigilantes com sucesso");
+
+                                                    updateExamesNormais(examesNormaisList);
+                                                    updateDocentes(docentesList);
+                                                    menu = 51;
+                                                    break;
+                                                    
+                                                }
+                                                indexDocente515 = findNaoDocente(naoDocentesList,numeroMecanograficoDocente515);
+                                                if(indexDocente515 >= 0){
+                                                    examesNormaisList.get(indexExameNormal515).addVigilanteNaoDocente(naoDocentesList.get(indexDocente515));
+                                                    docentesList.get(indexDocente515).addExame(examesNormaisList.get(indexExameNormal515));
+
+                                                    System.out.println("Nao docente adicionado a lista de vigilantes com sucesso");
+
+                                                    updateExamesNormais(examesNormaisList);
+                                                    updateNaoDocentes(naoDocentesList);
+                                                    menu = 51;
+                                                    break;
+                                                    
+                                                }
+                                                System.out.println("Nao encontrado o funcionario");
+                                                menu = 51;
+                                                
                                             case 516://Inscrever aluno
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina516 = input.nextLine();
+                                                
+                                                int indexExameNormal516 = findExameNormal(examesNormaisList,disciplina516);
+                                                if(indexExameNormal516 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Numero do aluno:");
+                                                int numeroAluno516 = input.nextInt();input.nextLine();
+                                                
+                                                int indexAluno514 = findAluno(alunosList,numeroAluno516);
+                                                if(indexAluno514 == -1){
+                                                    System.out.println("Aluno nao encontrado!");
+                                                    menu = 0;
+                                                }
+                                                
+                                                examesNormaisList.get(indexExameNormal516).addDocenteResponsavel(docentesList.get(indexAluno514));
+                                                alunosList.get(indexAluno514).addExame(examesNormaisList.get(indexExameNormal516));
+                                                
+                                                System.out.println("Aluno inscrito no exame com sucesso");
+                                                
+                                                updateExamesNormais(examesNormaisList);
+                                                updateAlunos(alunosList);
+                                                
+                                                menu = 51;
+                                                
 
                                                 break;
                                     case 52: // Recurso
@@ -477,21 +606,207 @@ public class ProjectoPOO {
                                             menu = 5;
                                         break;
                                             case 521:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina521 = input.nextLine();
+                                                
+                                                int indexDisciplina521 = findDisciplina(disciplinasList,disciplina521);
+                                                if(indexDisciplina521 == -1){
+                                                    System.out.println("Nao encontrada");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                ExameRecurso aux521 = new ExameRecurso(disciplinasList.get(indexDisciplina521));
+                                                examesRecursoList.add(aux521);
+                                                
+                                                System.out.println("Adicionado exame de recurso");
+                                                System.out.println(aux521.toString());
+                                                
+                                                updateExamesRecurso(examesRecursoList);
+                                                
+                                                menu = 52;
+                                                
 
                                                 break;
                                             case 522:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina522 = input.nextLine();
+                                                
+                                                int indexExameRecurso522 = findExameRecurso(examesRecursoList,disciplina522);
+                                                if(indexExameRecurso522 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Ano:");
+                                                int ano522 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Mes:");
+                                                int mes522 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Dia:");
+                                                int dia522 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Hora de inicio:");
+                                                int hotaInicio522 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Hora de fim:");
+                                                int horaFim522 = input.nextInt();input.nextLine();
+                                                
+                                                int dataIndex522 = findData(datasList,ano522,mes522,dia522,hotaInicio522,horaFim522);
+                                                if(dataIndex522 == -1){
+                                                    Data auxData522 = new Data(ano522,mes522,dia522,hotaInicio522,horaFim522);
+                                                    datasList.add(auxData522);
+                                                    dataIndex522 = findData(datasList,ano522,mes522,dia522,hotaInicio522,horaFim522);
+                                                    updateDatas(datasList);
+                                                }
+                                                
+                                                examesRecursoList.get(indexExameRecurso522).changeData(datasList.get(dataIndex522));
+                                                System.out.println("Alterada a data");
+                                                
+                                                updateExamesRecurso(examesRecursoList);
+                                                
+                                                menu = 52;
+                                                
 
                                                 break;
                                             case 523:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina523 = input.nextLine();
+                                                
+                                                int indexExameRecurso523 = findExameRecurso(examesRecursoList,disciplina523);
+                                                if(indexExameRecurso523 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Departamento da sala");
+                                                String departamentoSala523 = input.nextLine();
+                                                
+                                                System.out.println("Numero da sala");
+                                                String numeroSala523 = input.nextLine();
+                                                
+                                                int indexSala523 = findSala(salasList,departamentoSala523,numeroSala523);
+                                                if(indexSala523 == -1){
+                                                    System.out.println("Sala nao encontrada");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                examesRecursoList.get(indexExameRecurso523).addSala(salasList.get(indexSala523));
+                                                
+                                                System.out.println("Sala adicionada com sucesso!");
+                                                
+                                                updateExamesRecurso(examesRecursoList);
+                                                
+                                                menu = 52;
 
                                                 break;
                                             case 524:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina524 = input.nextLine();
+                                                
+                                                int indexExameRecursol524 = findExameRecurso(examesRecursoList,disciplina524);
+                                                if(indexExameRecursol524 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Numero mecanografico do docente responsavel:");
+                                                int numeroMecanograficoDocente524 = input.nextInt();input.nextLine();
+                                                
+                                                int indexDocente524 = findDocente(docentesList,numeroMecanograficoDocente524);
+                                                if(indexDocente524 == -1){
+                                                    System.out.println("Docente nao encontrado!");
+                                                    menu = 0;
+                                                }
+                                                
+                                                examesRecursoList.get(indexExameRecursol524).addDocenteResponsavel(docentesList.get(indexDocente524));
+                                                docentesList.get(indexDocente524).addExame(examesRecursoList.get(indexExameRecursol524));
+                                                
+                                                System.out.println("Docente responsavel adicionado com sucesso");
+                                                
+                                                updateExamesRecurso(examesRecursoList);
+                                                updateDocentes(docentesList);
+                                                
+                                                menu = 52;
 
                                                 break;
                                             case 525:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina525 = input.nextLine();
+                                                
+                                                int indexExameRecurso525 = findExameRecurso(examesRecursoList,disciplina525);
+                                                if(indexExameRecurso525 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Numero mecanografico do vigilante:");
+                                                int numeroMecanograficoDocente525 = input.nextInt();input.nextLine();
+                                                
+                                                int indexDocente525 = findDocente(docentesList,numeroMecanograficoDocente525);
+                                                if(indexDocente525 >= 0){
+                                                    examesRecursoList.get(indexExameRecurso525).addVigilanteDocente(docentesList.get(indexDocente525));
+                                                    docentesList.get(indexDocente525).addExame(examesRecursoList.get(indexExameRecurso525));
+
+                                                    System.out.println("Docente vigilante adicionado a lista de vigilantes com sucesso");
+
+                                                    updateExamesRecurso(examesRecursoList);
+                                                    updateDocentes(docentesList);
+                                                    
+                                                    menu = 52;
+                                                    break;
+                                                }
+                                                indexDocente515 = findNaoDocente(naoDocentesList,numeroMecanograficoDocente525);
+                                                if(indexDocente515 >= 0){
+                                                    examesRecursoList.get(indexExameRecurso525).addVigilanteNaoDocente(naoDocentesList.get(indexDocente525));
+                                                    docentesList.get(indexDocente525).addExame(examesRecursoList.get(indexExameRecurso525));
+
+                                                    System.out.println("Nao docente adicionado a lista de vigilantes com sucesso");
+
+                                                    updateExamesRecurso(examesRecursoList);
+                                                    updateNaoDocentes(naoDocentesList);
+                                                    
+                                                    menu = 52;
+                                                    break;
+                                                }
+                                                System.out.println("Nao encontrado o funcionario");
+                                                menu = 52;
 
                                                 break;
                                             case 526:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina526 = input.nextLine();
+                                                
+                                                int indexExameRecurso526 = findExameRecurso(examesRecursoList,disciplina526);
+                                                if(indexExameRecurso526 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Numero do aluno:");
+                                                int numeroAluno526 = input.nextInt();input.nextLine();
+                                                
+                                                int indexAluno524 = findAluno(alunosList,numeroAluno526);
+                                                if(indexAluno524 == -1){
+                                                    System.out.println("Aluno nao encontrado!");
+                                                    menu = 0;
+                                                }
+                                                
+                                                examesRecursoList.get(indexExameRecurso526).addDocenteResponsavel(docentesList.get(indexAluno524));
+                                                alunosList.get(indexAluno524).addExame(examesRecursoList.get(indexExameRecurso526));
+                                                
+                                                System.out.println("Aluno inscrito no exame com sucesso");
+                                                
+                                                updateExamesRecurso(examesRecursoList);
+                                                updateAlunos(alunosList);
+                                                
+                                                menu = 52;
 
                                                 break;
                                     case 53: // Especial
@@ -510,21 +825,206 @@ public class ProjectoPOO {
                                             menu = 5;
                                         break;
                                             case 531:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina531 = input.nextLine();
+                                                
+                                                int indexDisciplina531 = findDisciplina(disciplinasList,disciplina531);
+                                                if(indexDisciplina531 == -1){
+                                                    System.out.println("Nao encontrada");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                ExameEspecial aux531 = new ExameEspecial(disciplinasList.get(indexDisciplina531));
+                                                examesEspeciaisList.add(aux531);
+                                                
+                                                System.out.println("Adicionado exame de recurso");
+                                                System.out.println(aux531.toString());
+                                                
+                                                updateExamesEspeciais(examesEspeciaisList);
+                                                
+                                                menu = 53;
 
                                                 break;
                                             case 532:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina532 = input.nextLine();
+                                                
+                                                int indexExameEspecial532 = findExameEspecial(examesEspeciaisList,disciplina532);
+                                                if(indexExameEspecial532 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Ano:");
+                                                int ano532 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Mes:");
+                                                int mes532 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Dia:");
+                                                int dia532 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Hora de inicio:");
+                                                int hotaInicio532 = input.nextInt();input.nextLine();
+                                                
+                                                System.out.println("Hora de fim:");
+                                                int horaFim532 = input.nextInt();input.nextLine();
+                                                
+                                                int dataIndex532 = findData(datasList,ano532,mes532,dia532,hotaInicio532,horaFim532);
+                                                if(dataIndex532 == -1){
+                                                    Data auxData532 = new Data(ano532,mes532,dia532,hotaInicio532,horaFim532);
+                                                    datasList.add(auxData532);
+                                                    dataIndex532 = findData(datasList,ano532,mes532,dia532,hotaInicio532,horaFim532);
+                                                    updateDatas(datasList);
+                                                }
+                                                
+                                                examesEspeciaisList.get(indexExameEspecial532).changeData(datasList.get(dataIndex532));
+                                                System.out.println("Alterada a data");
+                                                
+                                                updateExamesEspeciais(examesEspeciaisList);
+                                                
+                                                menu = 53;
 
                                                 break;
                                             case 533:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina533 = input.nextLine();
+                                                
+                                                int indexExameEspecial533 = findExameEspecial(examesEspeciaisList,disciplina533);
+                                                if(indexExameEspecial533 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Departamento da sala");
+                                                String departamentoSala533 = input.nextLine();
+                                                
+                                                System.out.println("Numero da sala");
+                                                String numeroSala533 = input.nextLine();
+                                                
+                                                int indexSala533 = findSala(salasList,departamentoSala533,numeroSala533);
+                                                if(indexSala533 == -1){
+                                                    System.out.println("Sala nao encontrada");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                examesEspeciaisList.get(indexExameEspecial533).addSala(salasList.get(indexSala533));
+                                                
+                                                System.out.println("Sala adicionada com sucesso!");
+                                                
+                                                updateExamesEspeciais(examesEspeciaisList);
+                                                
+                                                menu = 53;
 
                                                 break;
                                             case 534:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina534 = input.nextLine();
+                                                
+                                                int indexExameEspecial534 = findExameEspecial(examesEspeciaisList,disciplina534);
+                                                if(indexExameEspecial534 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Numero mecanografico do docente responsavel:");
+                                                int numeroMecanograficoDocente534 = input.nextInt();input.nextLine();
+                                                
+                                                int indexDocente534 = findDocente(docentesList,numeroMecanograficoDocente534);
+                                                if(indexDocente534 == -1){
+                                                    System.out.println("Docente nao encontrado!");
+                                                    menu = 0;
+                                                }
+                                                
+                                                examesEspeciaisList.get(indexExameEspecial534).addDocenteResponsavel(docentesList.get(indexDocente534));
+                                                docentesList.get(indexDocente534).addExame(examesEspeciaisList.get(indexExameEspecial534));
+                                                
+                                                System.out.println("Docente responsavel adicionado com sucesso");
+                                                
+                                                updateExamesEspeciais(examesEspeciaisList);
+                                                updateDocentes(docentesList);
+                                                
+                                                menu = 53;
 
                                                 break;
                                             case 535:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina535 = input.nextLine();
+                                                
+                                                int indexExameEspecial535 = findExameEspecial(examesEspeciaisList,disciplina535);
+                                                if(indexExameEspecial535 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Numero mecanografico do vigilante:");
+                                                int numeroMecanograficoDocente535 = input.nextInt();input.nextLine();
+                                                
+                                                int indexDocente535 = findDocente(docentesList,numeroMecanograficoDocente535);
+                                                if(indexDocente535 >= 0){
+                                                    examesEspeciaisList.get(indexExameEspecial535).addVigilanteDocente(docentesList.get(indexDocente535));
+                                                    docentesList.get(indexDocente535).addExame(examesEspeciaisList.get(indexExameEspecial535));
+
+                                                    System.out.println("Docente vigilante adicionado a lista de vigilantes com sucesso");
+
+                                                    updateExamesEspeciais(examesEspeciaisList);
+                                                    updateDocentes(docentesList);
+                                                    
+                                                    menu = 53;
+                                                    break;
+                                                }
+                                                indexDocente535 = findNaoDocente(naoDocentesList,numeroMecanograficoDocente535);
+                                                if(indexDocente535 >= 0){
+                                                    examesEspeciaisList.get(indexExameEspecial535).addVigilanteNaoDocente(naoDocentesList.get(indexDocente535));
+                                                    docentesList.get(indexDocente535).addExame(examesEspeciaisList.get(indexExameEspecial535));
+
+                                                    System.out.println("Nao docente adicionado a lista de vigilantes com sucesso");
+
+                                                    updateExamesEspeciais(examesEspeciaisList);
+                                                    updateNaoDocentes(naoDocentesList);
+                                                    
+                                                    menu = 53;
+                                                    break;
+                                                }
+                                                System.out.println("Nao encontrado o funcionario");
+                                                menu = 53;
 
                                                 break;
                                             case 536:
+                                                System.out.println("Disciplina do exame:");
+                                                String disciplina536 = input.nextLine();
+                                                
+                                                int indexExameEspecial526 = findExameEspecial(examesEspeciaisList,disciplina536);
+                                                if(indexExameEspecial526 == -1){
+                                                    System.out.println("Nao encontrado o exame");
+                                                    menu = 0;
+                                                    break;
+                                                }
+                                                
+                                                System.out.println("Numero do aluno:");
+                                                int numeroAluno536 = input.nextInt();input.nextLine();
+                                                
+                                                int indexAluno534 = findAluno(alunosList,numeroAluno536);
+                                                if(indexAluno534 == -1){
+                                                    System.out.println("Aluno nao encontrado!");
+                                                    menu = 0;
+                                                }
+                                                
+                                                if(alunosList.get(indexAluno534).addExameEspecial(examesEspeciaisList.get(indexExameEspecial526))){
+                                                    examesEspeciaisList.get(indexExameEspecial526).addDocenteResponsavel(docentesList.get(indexAluno534));
+                                                    System.out.println("Aluno inscrito no exame com sucesso");
+
+                                                    updateExamesEspeciais(examesEspeciaisList);
+                                                    updateAlunos(alunosList);
+                                                }
+                                                
+                                                
+                                                menu = 53;
 
                                                 break;
                             case 06: // notas
@@ -545,7 +1045,7 @@ public class ProjectoPOO {
                                 if(readInt == 0)
                                     menu = 0;
                                 break;
-                                    case 71:
+                                    case 71: // Listar Exames – Epoca, disciplina, data, hora, duracao, sala, numero de vigilantes convocados e de alunos inscritos
                                         for(ExameNormal en : examesNormaisList){
                                             // prepara o display das salas
                                             String salasString = "";
@@ -572,25 +1072,77 @@ public class ProjectoPOO {
                                                                " Numero de alunos inscritos: " + numeroAlunos);
                                         }
                                         for(ExameRecurso er: examesRecursoList){
+                                            // prepara o display das salas
+                                            String salasString = "";
+                                            for(Sala s : er.salas){
+                                                String salaStringAux = s.numeroSala + ", ";
+                                                salasString = salasString.concat(salaStringAux);
+                                            }
+                                            // conta o numero de vigilantes e o de alunos
+                                            int numeroAlunos = 0, numeroVigilantes = 0;
+                                            for(Aluno a: er.alunosInscritos)
+                                                numeroAlunos++;
+                                            for(Docente d: er.listaVigilantesDocentes)
+                                                numeroVigilantes++;
+                                            for(NaoDocente nd: er.listaVigilantesNaoDocentes)
+                                                numeroVigilantes++;
                                             
+                                            System.out.println("Epoca: Recurso" +
+                                                               " Disciplina: " + er.disciplina.nome + 
+                                                               " Data: " + er.data.ano+"-"+er.data.mes+"/"+er.data.dia +
+                                                               " Hora: " + er.data.horaInicio +
+                                                               " Duracao (em minutos): " + er.data.minutos +
+                                                               " Sala: " + salasString +
+                                                               " Numero de vigilantes convocados: "+ numeroVigilantes +
+                                                               " Numero de alunos inscritos: " + numeroAlunos);
                                         }
                                         for(ExameEspecial es: examesEspeciaisList){
+                                            // prepara o display das salas
+                                            String salasString = "";
+                                            for(Sala s : es.salas){
+                                                String salaStringAux = s.numeroSala + ", ";
+                                                salasString = salasString.concat(salaStringAux);
+                                            }
+                                            // conta o numero de vigilantes e o de alunos
+                                            int numeroAlunos = 0, numeroVigilantes = 0;
+                                            for(Aluno a: es.alunosInscritos)
+                                                numeroAlunos++;
+                                            for(Docente d: es.listaVigilantesDocentes)
+                                                numeroVigilantes++;
+                                            for(NaoDocente nd: es.listaVigilantesNaoDocentes)
+                                                numeroVigilantes++;
                                             
+                                            System.out.println("Epoca: Especial" +
+                                                               " Disciplina: " + es.disciplina.nome + 
+                                                               " Data: " + es.data.ano+"-"+es.data.mes+"/"+es.data.dia +
+                                                               " Hora: " + es.data.horaInicio +
+                                                               " Duracao (em minutos): " + es.data.minutos +
+                                                               " Sala: " + salasString +
+                                                               " Numero de vigilantes convocados: "+ numeroVigilantes +
+                                                               " Numero de alunos inscritos: " + numeroAlunos);
                                         }
                                         break;
-                                    case 72:
+                                    case 72: // Listar alunos inscritos num exame e classificacoes obtidas, caso existam
+                                            for(ExameNormal en : examesNormaisList){
+                                                
+                                            }
+                                            for(ExameRecurso er : examesRecursoList){
+                                                
+                                            }
+                                            for(ExameEspecial es : examesEspeciaisList){
+                                                
+                                            }
+                                            break;
+                                    case 73: // Listar exames em que um aluno está inscrito e classificações obtidas, caso existam
                                         
                                             break;
-                                    case 73:
+                                    case 74: // Listar docentes e funcionários associados a um exame
                                         
                                             break;
-                                    case 74:
+                                    case 75: // Listar exames em que um docente ou funcionário está envolvido
                                         
                                             break;
-                                    case 75:
-                                        
-                                            break;
-                                    case 76:
+                                    case 76: // Listar notas de um exame
                                         
                                             break;
                     default:break;

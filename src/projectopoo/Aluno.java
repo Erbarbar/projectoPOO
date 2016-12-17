@@ -19,6 +19,7 @@ class Aluno extends Pessoa implements Serializable{
     int anoMatriculacurso;
     String regime;
     List<Disciplina> listaDisciplinaNotas;
+    List<Exame> exames;
     List<Notas> notas;
     
     Aluno(String nome, String email, int numero, Curso curso, int ano, String regime){
@@ -28,11 +29,28 @@ class Aluno extends Pessoa implements Serializable{
         this.anoMatriculacurso = ano;
         this.regime = regime;
         this.listaDisciplinaNotas = new ArrayList<>();
+        this.exames = new ArrayList<>();
         this.notas = new ArrayList<>();
     }
     
     void addDisciplinas(Disciplina disciplina){
         listaDisciplinaNotas.add(disciplina);
+    }
+    
+    void addExame(Exame exame){
+        exames.add(exame);
+    }
+    
+    boolean addExameEspecial(ExameEspecial exameEspecial){
+        if(this.regime.equals("trabalhador-estudante") || 
+           this.regime.equals("atleta") ||
+           this.regime.equals("dirigente associativo") ||
+           this.anoMatriculacurso >= curso.duracao){
+            exames.add(exameEspecial);
+            return true;
+        }
+        System.out.println("O aluno nao reune condicoes para se inscrever a este exame");
+        return false;
     }
 
     @Override
