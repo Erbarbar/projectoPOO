@@ -22,4 +22,8 @@ class ExameEspecial extends Exame implements Serializable{
     }
     
     
+    void addNota(Notas nota){
+        notas.add(nota);
+    }
+    
 }

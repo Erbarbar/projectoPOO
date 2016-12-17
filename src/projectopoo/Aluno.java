@@ -52,6 +52,9 @@ class Aluno extends Pessoa implements Serializable{
         System.out.println("O aluno nao reune condicoes para se inscrever a este exame");
         return false;
     }
+    void addNota(Notas nota){
+        this.notas.add(nota);
+    }
 
     @Override
     public String toString() {

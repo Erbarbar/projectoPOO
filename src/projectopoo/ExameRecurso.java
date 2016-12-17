@@ -20,4 +20,8 @@ public class ExameRecurso extends Exame implements Serializable{
         super(disciplina);
         this.notas = new ArrayList<>();
     }
+    
+    void addNota(Notas nota){
+        notas.add(nota);
+    }
 }

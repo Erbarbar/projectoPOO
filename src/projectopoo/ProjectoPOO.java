@@ -1028,8 +1028,134 @@ public class ProjectoPOO {
 
                                                 break;
                             case 06: // notas
+                                System.out.println("1) Epoca normal");
+                                System.out.println("2) Epoca recurso");
+                                System.out.println("3) Epoca especial");
+                                System.out.println("0) Voltar");
+
+                                readInt = input.nextInt(); input.nextLine();
+                                if(readInt == 0){
+                                    menu = 0;
+                                    break;
+                                }
+                                if(readInt >=1 && readInt <= 3)
+                                    menu = 60 + readInt;
 
                                 break;
+                                    case 61: // normal
+                                        System.out.println("Qual a disciplina do exame:");
+                                        String disciplina61 = input.nextLine();
+                                        int indiceExame61 = findExameNormal(examesNormaisList,disciplina61);
+                                        if(indiceExame61 == -1){
+                                            System.out.println("Exame nao encontrado");
+                                            menu = 0;
+                                            break;
+                                        }
+                                        System.out.println("Numero do aluno:");
+                                        int numeroAluno61 = input.nextInt(); input.nextLine();
+                                        int indiceAluno61 = findAluno(alunosList, numeroAluno61);
+                                        if(indiceAluno61 == -1){
+                                            System.out.println("Aluno nao encontrado");
+                                            menu = 0;
+                                            break;
+                                        }
+                                        System.out.println("Classificacao:");
+                                        float nota61 = input.nextFloat(); input.nextLine();
+                                        
+                                        // cria a nota na bd
+                                        Notas aux61 = new Notas(alunosList.get(indiceAluno61), nota61, examesNormaisList.get(indiceExame61));
+                                        notasList.add(aux61);
+                                        updateNotas(notasList);
+                                        
+                                        // adiciona nota ao exame
+                                        examesNormaisList.get(indiceExame61).addNota(aux61);
+                                        updateExamesNormais(examesNormaisList);
+                                        
+                                        // adiciona nota ao aluno
+                                        alunosList.get(indiceAluno61).addNota(aux61);
+                                        updateAlunos(alunosList);
+                                        
+                                        System.out.println("Nota atribuida com sucesso!");
+                                        
+                                        menu = 6;
+
+                                        break;
+                                    case 62: // recurso
+                                        System.out.println("Qual a disciplina do exame:");
+                                        String disciplina62 = input.nextLine();
+                                        int indiceExame62 = findExameRecurso(examesRecursoList,disciplina62);
+                                        if(indiceExame62 == -1){
+                                            System.out.println("Exame nao encontrado");
+                                            menu = 0;
+                                            break;
+                                        }
+                                        System.out.println("Numero do aluno:");
+                                        int numeroAluno62 = input.nextInt(); input.nextLine();
+                                        int indiceAluno62 = findAluno(alunosList, numeroAluno62);
+                                        if(indiceAluno62 == -1){
+                                            System.out.println("Aluno nao encontrado");
+                                            menu = 0;
+                                            break;
+                                        }
+                                        System.out.println("Classificacao:");
+                                        float nota62 = input.nextFloat(); input.nextLine();
+                                        
+                                        // cria a nota na bd
+                                        Notas aux62 = new Notas(alunosList.get(indiceAluno62), nota62, examesRecursoList.get(indiceExame62));
+                                        notasList.add(aux62);
+                                        updateNotas(notasList);
+                                        
+                                        // adiciona nota ao exame
+                                        examesRecursoList.get(indiceExame62).addNota(aux62);
+                                        updateExamesRecurso(examesRecursoList);
+                                        
+                                        // adiciona nota ao aluno
+                                        alunosList.get(indiceAluno62).addNota(aux62);
+                                        updateAlunos(alunosList);
+                                        
+                                        System.out.println("Nota atribuida com sucesso!");
+                                        
+                                        menu = 6;
+
+                                        break;
+                                    case 63: // especial
+                                        System.out.println("Qual a disciplina do exame:");
+                                        String disciplina63 = input.nextLine();
+                                        int indiceExame63 = findExameEspecial(examesEspeciaisList,disciplina63);
+                                        if(indiceExame63 == -1){
+                                            System.out.println("Exame nao encontrado");
+                                            menu = 0;
+                                            break;
+                                        }
+                                        System.out.println("Numero do aluno:");
+                                        int numeroAluno63 = input.nextInt(); input.nextLine();
+                                        int indiceAluno63 = findAluno(alunosList, numeroAluno63);
+                                        if(indiceAluno63 == -1){
+                                            System.out.println("Aluno nao encontrado");
+                                            menu = 0;
+                                            break;
+                                        }
+                                        System.out.println("Classificacao:");
+                                        float nota63 = input.nextFloat(); input.nextLine();
+                                        
+                                        // cria a nota na bd
+                                        Notas aux63 = new Notas(alunosList.get(indiceAluno63), nota63, examesEspeciaisList.get(indiceExame63));
+                                        notasList.add(aux63);
+                                        updateNotas(notasList);
+                                        
+                                        // adiciona nota ao exame
+                                        examesEspeciaisList.get(indiceExame63).addNota(aux63);
+                                        updateExamesEspeciais(examesEspeciaisList);
+                                        
+                                        // adiciona nota ao aluno
+                                        alunosList.get(indiceAluno63).addNota(aux63);
+                                        updateAlunos(alunosList);
+                                        
+                                        System.out.println("Nota atribuida com sucesso!");
+                                        
+                                        menu = 6;
+
+                                        break;
                             case 07: // informacoes exames
                                 System.out.println("1) Listar Exames – Epoca, disciplina, data, hora, duracao, sala, numero de vigilantes convocados e de alunos inscritos");
                                 System.out.println("2) Listar alunos inscritos num exame e classificacoes obtidas, caso existam");

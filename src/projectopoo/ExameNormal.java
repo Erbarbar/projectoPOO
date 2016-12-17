@@ -21,5 +21,8 @@ public class ExameNormal extends Exame implements Serializable{
         this.notas = new ArrayList<>();
     }
     
+    void addNota(Notas nota){
+        notas.add(nota);
+    }
     
 }
